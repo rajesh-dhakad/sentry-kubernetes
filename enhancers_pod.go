@@ -108,7 +108,7 @@ func runPodEnhancer(ctx context.Context, podMeta *v1.ObjectReference, cachedObje
 		// The job is not owned by a cronJob
 		if !ok {
 			owner := pod.OwnerReferences[0]
-			sentryEvent.Fingerprint = append(sentryEvent.Fingerprint, owner.Kind, owner.Name)
+			sentryEvent.Fingerprint = append(sentryEvent.Fingerprint, owner.Kind, podName)
 		}
 	}
 
