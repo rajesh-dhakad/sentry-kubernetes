@@ -27,8 +27,8 @@ func handlePodTerminationEvent(ctx context.Context, containerStatus *v1.Containe
 	state := containerStatus.State.Terminated
 
 	logger.Trace().Msgf("Container state: %#v", state)
-	if state.ExitCode == 0 {
-		// Nothing to do
+	if state.ExitCode == 0 || state.Reason != "OOMKilled" {
+		// Ignore successful exits and anything that's not OOMKilled
 		return nil
 	}
 
